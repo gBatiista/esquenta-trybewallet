@@ -28,7 +28,7 @@ class Login extends Component {
     const { history, dispatch } = this.props;
     const { email, password } = this.state;
     dispatch(login({ email, password }));
-    history.push('/props');
+    history.push('/prots');
   };
 
   render() {
