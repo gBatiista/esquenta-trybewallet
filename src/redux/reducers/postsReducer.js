@@ -1,21 +1,32 @@
+import { GET_POSTS, FAILED_REQUEST, SUCCEEDED_REQUEST } from '../types/postsType';
+
 const INITIAL_STATE = {
   posts: [],
+  isLoading: false,
+  error: null,
 
 };
 function postsReducer(state = INITIAL_STATE, action) {
   const { payload, type } = action;
   switch (type) {
-  case LOGIN:
+  case GET_POSTS:
     return {
       ...state,
-      email: payload.email,
-      password: payload.password,
+      isLoading: true,
     };
-  case ADD_INFO:
+  case SUCCEEDED_REQUEST:
+    console.log(payload);
     return {
       ...state,
-      userName: payload.userName,
-      phone: payload.phone,
+      isLoading: false,
+      posts: payload,
+
+    };
+  case FAILED_REQUEST:
+    return {
+      ...state,
+      isLoading: false,
+      error: payload,
 
     };
   default:
