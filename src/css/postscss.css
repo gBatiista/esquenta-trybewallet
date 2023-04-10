@@ -1,0 +1,15 @@
+.divposts {
+margin-top: 30px;
+margin-left: 10px;
+  height: 200px;
+  width: 400px;
+border:2px solid black;
+}
+
+.divcontent{
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 20px;
+
+ 
+}
