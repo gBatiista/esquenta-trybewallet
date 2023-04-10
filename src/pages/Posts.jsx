@@ -1,12 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { login } from '../redux/actions/userAction';
+import { fetchApiThunk } from '../redux/actions/postsAction';
+import '../css/postscss.css';
+// import Loading from '../component/loading';--componente apenas com um 'carregando...'
 
 class Posts extends Component {
   state = {
     userName: '',
     phone: '',
   };
+
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(fetchApiThunk());
+  }
 
   handleChange = ({ target }) => {
     const { name, value } = target;
@@ -21,7 +30,10 @@ class Posts extends Component {
 
   render() {
     const { userName, phone } = this.state;
+    const { posts } = this.props;// falta implementar o loading
+    console.log(posts);
     return (
+
       <div>
         <form>
           <label>
@@ -47,15 +59,32 @@ class Posts extends Component {
             </button>
           </label>
         </form>
+        <div className="divcontent">
+
+          {
+            posts.map((e, index) => (
+              <div className="divposts" key={ index }>
+                <p>{e.userId}</p>
+                <p>{e.title}</p>
+                <p>{e.body}</p>
+
+              </div>))
+          }
+        </div>
 
       </div>
+
     );
   }
 }
 Posts.propTypes = {
   dispatch: PropTypes.func.isRequired,
-};
+  posts: PropTypes.array,
+}.isRequired;
 
-// const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  posts: state.posts.posts,
+  isLoading: state.posts.isLoading,
+});
 
 export default connect(mapStateToProps, null)(Posts);
