@@ -1,7 +1,9 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
+import Login from './pages/Login';
+import Posts from './pages/Posts';
 
-class App extends React.Component() {
+class App extends React.Component {
   render() {
     return (
       <Switch>
