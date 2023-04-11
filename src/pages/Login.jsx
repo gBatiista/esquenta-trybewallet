@@ -21,14 +21,14 @@ class Login extends Component {
     const numberMin = 4;
     const verifyEmail = regex.test(email);
     const verifyPassword = password.length >= numberMin;
-    this.setState({ isDisabled: !(verifyEmail, verifyPassword) });
+    this.setState({ isDisabled: !(verifyEmail && verifyPassword) });
   };
 
   handleClick = () => {
     const { history, dispatch } = this.props;
     const { email, password } = this.state;
     dispatch(login({ email, password }));
-    history.push('/prots');
+    history.push('/posts');
   };
 
   render() {

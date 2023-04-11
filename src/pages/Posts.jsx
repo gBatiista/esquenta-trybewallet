@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { login } from '../redux/actions/userAction';
+import { addInfo } from '../redux/actions/userAction';
 import { fetchApiThunk } from '../redux/actions/postsAction';
-import '../css/postscss.css';
-// import Loading from '../component/loading';--componente apenas com um 'carregando...'
+import '../css/Posts.css';
+import Loading from '../component/loading';
 
 class Posts extends Component {
   state = {
@@ -25,13 +25,17 @@ class Posts extends Component {
   handleClick = () => {
     const { dispatch } = this.props;
     const { userName, phone } = this.state;
-    dispatch(login({ userName, phone }));
+    dispatch(addInfo({ userName, phone }));
   };
 
   render() {
     const { userName, phone } = this.state;
-    const { posts } = this.props;// falta implementar o loading
-    console.log(posts);
+    const { posts, isLoading } = this.props;
+
+    if (isLoading) {
+      return <Loading />;
+    }
+
     return (
 
       <div>
@@ -83,8 +87,7 @@ Posts.propTypes = {
 }.isRequired;
 
 const mapStateToProps = (state) => ({
-  posts: state.posts.posts,
-  isLoading: state.posts.isLoading,
+  ...state.posts,
 });
 
 export default connect(mapStateToProps, null)(Posts);

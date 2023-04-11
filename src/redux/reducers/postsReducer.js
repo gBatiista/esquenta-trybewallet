@@ -15,7 +15,6 @@ function postsReducer(state = INITIAL_STATE, action) {
       isLoading: true,
     };
   case SUCCEEDED_REQUEST:
-    console.log(payload);
     return {
       ...state,
       isLoading: false,
