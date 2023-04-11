@@ -1,70 +1,66 @@
-# Getting Started with Create React App
+# Esquenta para o Projeto TrybeWallet #
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Projeto Post List ##
 
-## Available Scripts
 
-In the project directory, you can run:
+# Orientações # 
+1 - Clone o repositório do exercício
+- Use o comando: 
+`
+ git clone git@github.com:gBatiista/esquenta-trybewallet.git
+`
 
-### `npm start`
+2 - Instale as dependências
+- `npm install`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+# Requisitos #
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 1. Faça o setup inicial do Redux criando as seguintes pastas e arquivos:
 
-### `npm test`
+ > 1 - src/redux ---- contendo o arquivo: `store.js` <br><br>
+   2 - src/redux/reducers ---- contendo os arquivos:  `userReducer.js, postsReducer.js, index.js` <br> obs: realizar o `combineReducers` no arquivo `index.js` <br><br>
+   3 - src/redux/actions ---- contendo os arquivos:  `userAction.js, postsAction.js` <br><br>
+   4 - src/redux/types ---- contendo os arquivos:  `userType.js, postsType.js` <br>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+## 2. Crie uma página de **Login** ##
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Crie um componente `Login` que será o seu formulário dentro  do diretório `src/pages`.
+- O componente deve ter um elemento do tipo `form` e conter os seguintes inputs:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+> 1 - Input do tipo `email` que será o campo referente ao email do usuário <br>
+2 - Input do tipo `password` que será o campo referente ao password do usuário <br>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Inserir um botão com o texto "Login" que devera redirecionar para a rota `/posts`
 
-### `npm run eject`
+- ao clicar no botão você deve disparar uma `action` para salvar o email e password dentro de userReducer.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 3. Crie uma página de **Posts**
+  - Ao inicializar essa página deve disparar uma `action` para fazer o fetch em uma API de posts, a função para o fetch já existe dentro de `/src/utils/fetchPosts.js` **Dica: lembrem do redux-thunk**
+  - Os `posts` devem ficar salvos dentro de postsReducer
+  <br><br>
+  - Essa página deve conter um `form` simples para adicionar `nome` e `número de telefone` nas informações do usuário
+> OBS: Cuidado para não apagar as informações já existentes do usuário.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 4. Crie um componente chamado **UserInfo** em `src/components`
+- Esse componente deve renderizar as seguintes infomações do usuário
+- 1 - Email <br>
+  2 - Nome <br>
+  3 - Telefone <br>
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- Você pode utilizar qualquer tag HTML que faça sentido
 
-## Learn More
+- Renderize esse componente abaixo do forms na página `Posts`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 5. Por fim faça um **.map()** dos posts salvos no Redux dentro da página **Posts**
+  - Crie uma tag `div` com a classe `"divcontent"`
+  - Dentro de `divcontent` faça o map de posts criando uma outra `div` com a classe `"divposts"`
+  - Por fim dentro de divposts renderize `userId`, `title` e `body` de cada post utilizando tags HTML da sua escolha
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## (BONUS) - 5. Em Login, crie a função `validateFields`
+A função `validateFields` deverá validar os campos de `email`  e `password` com as seguintes condições:
+- `email` deve ser um email valido
+- `password` deve ter mais de 4 caracteres
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+E, caso os campos sejam válidos, o botão "Adicionar" deve ser habilitado via `state` disabledButton.
