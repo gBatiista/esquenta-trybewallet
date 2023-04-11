@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import { addInfo } from '../redux/actions/userAction';
 import { fetchApiThunk } from '../redux/actions/postsAction';
 import '../css/Posts.css';
-import Loading from '../component/loading';
+import Loading from '../components/loading';
+import UserInfo from '../components/UserInfo';
 
 class Posts extends Component {
   state = {
@@ -37,7 +38,6 @@ class Posts extends Component {
     }
 
     return (
-
       <div>
         <form>
           <label>
@@ -54,30 +54,24 @@ class Posts extends Component {
               onChange={ this.handleChange }
             />
 
-            <button
-              type="button"
-              onClick={ this.handleClick }
-            >
+            <button type="button" onClick={ this.handleClick }>
               Adicionar Informações
-
             </button>
           </label>
         </form>
+
+        <UserInfo />
+
         <div className="divcontent">
-
-          {
-            posts.map((e, index) => (
-              <div className="divposts" key={ index }>
-                <p>{e.userId}</p>
-                <p>{e.title}</p>
-                <p>{e.body}</p>
-
-              </div>))
-          }
+          {posts.map((e, index) => (
+            <div className="divposts" key={ index }>
+              <p>{e.userId}</p>
+              <p>{e.title}</p>
+              <p>{e.body}</p>
+            </div>
+          ))}
         </div>
-
       </div>
-
     );
   }
 }
